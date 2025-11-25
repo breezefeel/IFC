@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFC | 국제얼굴교정학회 (International Face Correction)</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;900&family=Pretendard:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* 기본 스타일 */
+        body { 
+            font-family: 'Pretendard', sans-serif; 
+            word-break: keep-all; 
+            background-color: #FFFBF7; /* 웜톤 미색 배경 */
+            color: #333;
+        }
+        .font-serif { font-family: 'Noto Serif KR', serif; }
+        
+        /* 브랜드 컬러: 오렌지 */
+        .text-brand { color: #EA580C; }
+        .bg-brand { background-color: #EA580C; }
+        .border-brand { border-color: #EA580C; }
+        .hover-bg-brand:hover { background-color: #C2410C; }
+
+        /* 체크리스트 스타일 */
+        .check-item {
+            display: flex; align-items: flex-start; padding: 1.2rem;
+            border-bottom: 1px solid #FED7AA;
+            transition: background-color 0.2s; border-radius: 8px;
+        }
+        .check-item:hover { background-color: #FFF7ED; }
+        .check-item input[type="checkbox"] {
+            margin-right: 1rem; margin-top: 0.3rem;
+            min-width: 1.25rem; min-height: 1.25rem;
+            accent-color: #EA580C; cursor: pointer;
+        }
+        .item-image {
+            margin-left: 1rem; flex-shrink: 0;
+            width: 80px; height: 80px; object-fit: cover;
+            border-radius: 8px; border: 1px solid #FED7AA;
+        }
+        @media (max-width: 640px) { .item-image { display: none; } }
+
+        /* 페이지 전환 애니메이션 */
+        .page-content { display: none; animation: fadeIn 0.6s ease-out; }
+        .page-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-orange-100">
+        <div class="container mx-auto px-4 lg:px-8 py-4">
+            <div class="flex justify-between items-center">
+                <div onclick="switchPage('page1')" class="flex items-center gap-2 cursor-pointer group">
+                    <span class="text-2xl font-black text-brand font-serif">IFC</span>
+                    <span class="hidden md:inline-block text-xs text-gray-500 tracking-widest border-l border-gray-300 pl-2 ml-2">
+                        International Face Correction
+                    </span>
+                </div>
+
+                <div class="hidden lg:flex space-x-1 text-sm font-medium text-gray-600">
+                    <button id="nav-page1" onclick="switchPage('page1')" class="px-4 py-2 rounded-full hover:text-brand transition">학회 소개</button>
+                    <button id="nav-page2" onclick="switchPage('page2')" class="px-4 py-2 rounded-full hover:text-brand transition">리:얼 작은얼굴</button>
+                    <button id="nav-page3" onclick="switchPage('page3')" class="px-4 py-2 rounded-full hover:text-brand transition">리:얼핏 페이스</button>
+                    <button id="nav-page4" onclick="switchPage('page4')" class="px-4 py-2 rounded-full hover:text-brand transition">전문가 과정</button>
+                    <button id="nav-page5" onclick="switchPage('page5')" class="px-4 py-2 rounded-full text-brand font-bold border border-orange-200 hover:bg-orange-50 transition">자가 진단</button>
+                </div>
+
+                <button onclick="goToContact()" class="bg-gray-900 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-gray-700 transition shadow-md">
+                    문의하기
+                </button>
+            </div>
+        </div>
+        
+        <div class="lg:hidden border-t border-gray-100 bg-white overflow-x-auto whitespace-nowrap hide-scrollbar">
+            <div class="flex px-2 py-1">
+                <button id="mob-nav-page1" onclick="switchPage('page1')" class="flex-1 py-3 px-4 text-xs font-bold text-gray-500 border-b-2 border-transparent">학회 소개</button>
+                <button id="mob-nav-page2" onclick="switchPage('page2')" class="flex-1 py-3 px-4 text-xs font-bold text-gray-500 border-b-2 border-transparent">수기 관리</button>
+                <button id="mob-nav-page3" onclick="switchPage('page3')" class="flex-1 py-3 px-4 text-xs font-bold text-gray-500 border-b-2 border-transparent">얼굴 운동</button>
+                <button id="mob-nav-page4" onclick="switchPage('page4')" class="flex-1 py-3 px-4 text-xs font-bold text-gray-500 border-b-2 border-transparent">전문가</button>
+                <button id="mob-nav-page5" onclick="switchPage('page5')" class="flex-1 py-3 px-4 text-xs font-bold text-brand border-b-2 border-transparent">자가 진단</button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="page1" class="page-content active pt-6">
+        <header class="relative py-24 lg:py-32 overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2074&auto=format&fit=crop" alt="Conference" class="w-full h-full object-cover brightness-[0.4]">
+            </div>
+            <div class="container mx-auto px-6 relative z-10 text-center text-white">
+                <p class="text-orange-400 font-bold tracking-[0.3em] mb-4 text-xs md:text-sm uppercase" data-aos="fade-down">The Standard of Face Correction</p>
+                <h1 class="text-4xl lg:text-6xl font-black mb-6 leading-tight font-serif" data-aos="fade-up">
+                    얼굴의 해답,<br><span class="text-brand">과학적 근거</span>에서 찾다
+                </h1>
+                <p class="text-lg text-gray-200 max-w-2xl mx-auto mb-10 font-light" data-aos="fade-up" data-aos-delay="100">
+                    IFC(국제얼굴교정학회)는 닥터, 물리치료사, 운동 전문가가 모여<br class="hidden md:block">
+                    가장 안전하고 효과적인 얼굴 교정 솔루션을 연구하는 전문 학회입니다.
+                </p>
+                <button onclick="switchPage('page5')" class="bg-brand text-white px-10 py-4 rounded-full font-bold hover:bg-white hover:text-brand transition shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                    내 얼굴 분석 시작하기
+                </button>
+            </div>
+        </header>
+
+        <section class="py-16 bg-white border-b border-orange-100">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div data-aos="zoom-in">
+                        <p class="text-4xl lg:text-5xl font-black text-brand mb-2 font-serif">15<span class="text-2xl">+</span></p>
+                        <p class="text-sm text-gray-500 font-bold">Years of Research</p>
+                    </div>
+                    <div data-aos="zoom-in" data-aos-delay="100">
+                        <p class="text-4xl lg:text-5xl font-black text-brand mb-2 font-serif">12k<span class="text-2xl">+</span></p>
+                        <p class="text-sm text-gray-500 font-bold">Clinical Cases</p>
+                    </div>
+                    <div data-aos="zoom-in" data-aos-delay="200">
+                        <p class="text-4xl lg:text-5xl font-black text-brand mb-2 font-serif">98<span class="text-2xl">%</span></p>
+                        <p class="text-sm text-gray-500 font-bold">Satisfaction Rate</p>
+                    </div>
+                    <div data-aos="zoom-in" data-aos-delay="300">
+                        <p class="text-4xl lg:text-5xl font-black text-brand mb-2 font-serif">300<span class="text-2xl">+</span></p>
+                        <p class="text-sm text-gray-500 font-bold">Certified Experts</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-orange-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-12 font-serif">IFC Programs</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition cursor-pointer" onclick="switchPage('page2')">
+                        <div class="text-brand text-4xl mb-4"><i class="fa-solid fa-hand-holding-medical"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Manual Therapy</h3>
+                        <p class="text-gray-500 text-sm">전문가의 손길로 완성하는<br>작은 얼굴 & 비대칭 교정</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition cursor-pointer" onclick="switchPage('page3')">
+                        <div class="text-brand text-4xl mb-4"><i class="fa-solid fa-face-smile"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Face PT</h3>
+                        <p class="text-gray-500 text-sm">스스로 만드는 탄력,<br>과학적인 얼굴 근육 운동</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition cursor-pointer" onclick="switchPage('page4')">
+                        <div class="text-brand text-4xl mb-4"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Academy</h3>
+                        <p class="text-gray-500 text-sm">대체 불가능한 전문가로 성장하는<br>마스터 교육 과정</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="page2" class="page-content pt-10">
+        <header class="bg-white py-16 text-center border-b border-orange-50">
+            <div class="container mx-auto px-6">
+                <span class="bg-orange-100 text-brand px-3 py-1 rounded-full text-xs font-bold mb-4 inline-block">Manual Therapy</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 font-serif">리:얼 작은얼굴 관리</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                    얼굴이 커 보이는 이유는 뼈 때문만이 아닙니다.<br>
+                    <strong>근육, 지방, 부종(체액)</strong> 등 연부조직을 전문가의 수기 요법으로 관리하여<br>
+                    숨겨진 본연의 윤곽을 되찾아 드립니다.
+                </p>
+            </div>
+        </header>
+
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row gap-12 items-center">
+                    <div class="md:w-1/2" data-aos="fade-right">
+                        <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=2070&auto=format&fit=crop" alt="Massage" class="rounded-2xl shadow-2xl w-full h-[400px] object-cover">
+                    </div>
+                    <div class="md:w-1/2" data-aos="fade-left">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-900">단순한 마사지가 아닙니다.</h3>
+                        <ul class="space-y-6">
+                            <li class="flex gap-4">
+                                <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center text-brand font-bold shrink-0">1</div>
+                                <div>
+                                    <h4 class="font-bold text-lg">근막 이완 (Myofascial Release)</h4>
+                                    <p class="text-sm text-gray-500 mt-1">유착된 근육과 근막을 풀어 얼굴의 긴장과 비대칭을 해소합니다.</p>
+                                </div>
+                            </li>
+                            <li class="flex gap-4">
+                                <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center text-brand font-bold shrink-0">2</div>
+                                <div>
+                                    <h4 class="font-bold text-lg">림프 순환 (Lymphatic Drainage)</h4>
+                                    <p class="text-sm text-gray-500 mt-1">정체된 노폐물을 배출하여 즉각적인 붓기 완화와 안색 개선을 돕습니다.</p>
+                                </div>
+                            </li>
+                            <li class="flex gap-4">
+                                <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center text-brand font-bold shrink-0">3</div>
+                                <div>
+                                    <h4 class="font-bold text-lg">두개골/턱관절 밸런스</h4>
+                                    <p class="text-sm text-gray-500 mt-1">미세한 골격의 움직임을 고려하여 구조적인 안정성을 회복합니다.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-16 text-center">
+                    <button onclick="goToContact()" class="bg-gray-900 text-white px-10 py-4 rounded-full font-bold hover:bg-brand transition">
+                        1:1 수기 관리 상담 예약
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="page3" class="page-content pt-10">
+        <div class="bg-gradient-to-br from-orange-50 to-white py-20">
+            <div class="container mx-auto px-6 flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2" data-aos="fade-right">
+                    <span class="text-brand font-bold tracking-widest mb-2 block">FACE PT PROGRAM</span>
+                    <h2 class="text-4xl lg:text-5xl font-black text-gray-900 mb-6 leading-tight font-serif">
+                        얼굴 탄력의 핵심은<br><span class="text-brand underline decoration-orange-200">속근육</span>입니다.
+                    </h2>
+                    <p class="text-gray-600 text-lg mb-8 leading-relaxed">
+                        몸의 근육을 단련하듯, 얼굴 표정 근육도 운동이 필요합니다.<br>
+                        <strong>'리:얼핏 페이스'</strong>는 올바른 근육 사용법을 익혀<br>
+                        스스로 노화를 예방하고 리프팅 효과를 만드는 프로그램입니다.
+                    </p>
+                    <button onclick="switchPage('page5')" class="bg-brand text-white px-8 py-3 rounded-full font-bold hover:bg-gray-900 transition shadow-md">
+                        내 표정 습관 체크하기
+                    </button>
+                </div>
+                <div class="lg:w-1/2" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af93?q=80&w=2073&auto=format&fit=crop" alt="Face Yoga" class="rounded-3xl shadow-2xl w-full h-[400px] object-cover">
+                </div>
+            </div>
+        </div>
+
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6 max-w-5xl">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="border border-gray-100 p-8 rounded-2xl hover:border-brand transition group">
+                        <div class="text-4xl mb-4 group-hover:scale-110 transition">😊</div>
+                        <h3 class="text-xl font-bold mb-2">스마일 근육 강화</h3>
+                        <p class="text-gray-500 text-sm">광대 근육(Zygomaticus)을 활성화하여 처짐을 방지하고 밝은 인상을 만듭니다.</p>
+                    </div>
+                    <div class="border border-gray-100 p-8 rounded-2xl hover:border-brand transition group">
+                        <div class="text-4xl mb-4 group-hover:scale-110 transition">👅</div>
+                        <h3 class="text-xl font-bold mb-2">뮤잉 (Mewing)</h3>
+                        <p class="text-gray-500 text-sm">혀의 올바른 위치를 훈련하여 이중턱을 예방하고 턱선을 날렵하게 합니다.</p>
+                    </div>
+                    <div class="border border-gray-100 p-8 rounded-2xl hover:border-brand transition group">
+                        <div class="text-4xl mb-4 group-hover:scale-110 transition">💆</div>
+                        <h3 class="text-xl font-bold mb-2">저작근 이완</h3>
+                        <p class="text-gray-500 text-sm">과도하게 발달한 턱 근육을 이완하고, 편안한 턱관절 움직임을 만듭니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="page4" class="page-content pt-10">
+        <header class="bg-gray-900 text-white py-24 text-center">
+            <div class="container mx-auto px-6">
+                <span class="text-brand font-bold tracking-widest text-sm uppercase mb-4 block">IFC Academy</span>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 font-serif">Professional Certification</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                    해부학적 이론부터 실전 테크닉까지.<br>
+                    대체 불가능한 <strong>얼굴 교정 전문가</strong>로 성장하는 마스터 코스입니다.
+                </p>
+            </div>
+        </header>
+
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <div class="space-y-8">
+                    <div class="flex md:items-center gap-6 border-l-4 border-gray-200 pl-6 pb-2 relative" data-aos="fade-up">
+                        <div class="absolute -left-[14px] top-0 w-6 h-6 bg-brand rounded-full border-4 border-white"></div>
+                        <div class="flex-1">
+                            <span class="text-brand font-bold text-sm">STEP 01</span>
+                            <h3 class="text-xl font-bold text-gray-900">Medical Theory (이론)</h3>
+                            <p class="text-gray-600 text-sm mt-1">얼굴의 해부학(근육, 신경, 혈관, 림프) 및 생리학적 기전을 완벽하게 이해합니다.</p>
+                        </div>
+                    </div>
+                    <div class="flex md:items-center gap-6 border-l-4 border-gray-200 pl-6 pb-2 relative" data-aos="fade-up" data-aos-delay="100">
+                        <div class="absolute -left-[14px] top-0 w-6 h-6 bg-brand rounded-full border-4 border-white"></div>
+                        <div class="flex-1">
+                            <span class="text-brand font-bold text-sm">STEP 02</span>
+                            <h3 class="text-xl font-bold text-gray-900">Assessment (평가)</h3>
+                            <p class="text-gray-600 text-sm mt-1">사진 분석, 촉진, 움직임 테스트를 통해 고객의 문제점을 정확히 진단하는 눈을 기릅니다.</p>
+                        </div>
+                    </div>
+                    <div class="flex md:items-center gap-6 border-l-4 border-gray-200 pl-6 pb-2 relative" data-aos="fade-up" data-aos-delay="200">
+                        <div class="absolute -left-[14px] top-0 w-6 h-6 bg-brand rounded-full border-4 border-white"></div>
+                        <div class="flex-1">
+                            <span class="text-brand font-bold text-sm">STEP 03</span>
+                            <h3 class="text-xl font-bold text-gray-900">Technique (실전)</h3>
+                            <p class="text-gray-600 text-sm mt-1">수기 요법(Manual)과 운동 지도법(Exercise)을 결합한 IFC만의 통합 솔루션을 습득합니다.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-16 p-8 bg-orange-50 rounded-2xl text-center">
+                    <h4 class="font-bold text-lg mb-4">전문가 과정 수강 문의</h4>
+                    <p class="text-sm text-gray-600 mb-6">자격 요건 및 일정은 개별 문의 바랍니다.</p>
+                    <button onclick="goToContact()" class="bg-gray-900 text-white px-8 py-3 rounded-full font-bold hover:bg-brand transition">
+                        커리큘럼 브로셔 신청하기
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="page5" class="page-content pt-10">
+        <header class="bg-white py-16 text-center border-b border-orange-100">
+            <div class="container mx-auto px-6">
+                <span class="text-brand font-bold tracking-widest text-sm uppercase mb-2 block">Self-Diagnosis</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-serif">안면비대칭 & 축소 자가 진단</h2>
+                <p class="text-gray-600 max-w-xl mx-auto">
+                    거울을 보며 나의 얼굴 상태를 체크해보세요.<br>
+                    체크된 항목의 개수에 따라 맞춤형 솔루션을 제안해 드립니다.
+                </p>
+            </div>
+        </header>
+
+        <div class="container mx-auto px-4 py-12 max-w-3xl">
+            <section class="mb-10 bg-white rounded-2xl shadow-sm border border-orange-100 overflow-hidden" data-aos="fade-up">
+                <div class="p-6 bg-orange-50 border-b border-orange-100 flex items-center gap-3">
+                    <span class="text-2xl">📏</span>
+                    <h3 class="text-xl font-bold text-gray-800">구조적 비대칭</h3>
+                </div>
+                <div class="p-2">
+                    <label class="check-item cursor-pointer">
+                        <input type="checkbox"><span class="flex-grow text-gray-700">양쪽 <b>눈썹 높이나 눈의 크기</b>가 다르다.</span>
+                        <img src="https://image.pollinations.ai/prompt/simple,drawing,asymmetrical,eyes,brows,orange,white,minimal" alt="눈 비대칭" class="item-image">
+                    </label>
+                    <label class="check-item cursor-pointer">
+                        <input type="checkbox"><span class="flex-grow text-gray-700"><b>콧대</b>가 한쪽으로 휘어져 보인다.</span>
+                        <img src="https://image.pollinations.ai/prompt/simple,drawing,crooked,nose,face,orange,white,minimal" alt="코 비대칭" class="item-image">
+                    </label>
+                    <label class="check-item cursor-pointer">
+                        <input type="checkbox"><span class="flex-grow text-gray-700">웃을 때 <b>입꼬리 높이</b>가 짝짝이다.</span>
+                        <img src="https://image.pollinations.ai/prompt/simple,drawing,uneven,smile,mouth,orange,white,minimal" alt="입꼬리 비대칭" class="item-image">
+                    </label>
+                </div>
+            </section>
+
+            <section class="mb-10 bg-white rounded-2xl shadow-sm border border-orange-100 overflow-hidden" data-aos="fade-up">
+                <div class="p-6 bg-orange-50 border-b border-orange-100 flex items-center gap-3">
+                    <span class="text-2xl">🎈</span>
+                    <h3 class="text-xl font-bold text-gray-800">얼굴 비대 & 붓기</h3>
+                </div>
+                <div class="p-2">
+                    <label class="check-item cursor-pointer">
+                        <input type="checkbox"><span class="flex-grow text-gray-700">아침에 일어나면 <b>얼굴이 심하게 붓는다</b>.</span>
+                        <img src="https://image.pollinations.ai/prompt/simple,drawing,swollen,puffy,face,morning,orange,white,minimal" alt="얼굴 붓기" class="item-image">
+                    </label>
+                    <label class="check-item cursor-pointer">
+                        <input type="checkbox"><span class="flex-grow text-gray-700"><b>턱 라인이 둔탁</b>하고 이중턱이 잡힌다.</span>
+                        <img src="https://image.pollinations.ai/prompt/simple,drawing,double,chin,face,profile,orange,white,minimal" alt="이중턱" class="item-image">
+                    </label>
+                </div>
+            </section>
+
+            <section class="mb-12 bg-white rounded-2xl shadow-sm border border-orange-100 overflow-hidden" data-aos="fade-up">
+                <div class="p-6 bg-orange-50 border-b border-orange-100 flex items-center gap-3">
+                    <span class="text-2xl">😬</span>
+                    <h3 class="text-xl font-bold text-gray-800">턱관절 & 습관</h3>
+                </div>
+                <div class="p-2">
+                    <label class="check-item cursor-pointer">
+                        <input type="checkbox"><span class="flex-grow text-gray-700">입을 벌릴 때 <b>'딱' 소리나 통증</b>이 있다.</span>
+                        <img src="https://image.pollinations.ai/prompt/simple,drawing,jaw,pain,tmj,clicking,orange,white,minimal" alt="턱관절 통증" class="item-image">
+                    </label>
+                    <label class="check-item cursor-pointer">
+                        <input type="checkbox"><span class="flex-grow text-gray-700">음식을 <b>한쪽으로만 씹는</b> 편이다.</span>
+                        <img src="https://image.pollinations.ai/prompt/simple,drawing,chewing,food,one,side,orange,white,minimal" alt="편측 저작" class="item-image">
+                    </label>
+                </div>
+            </section>
+
+            <section class="mb-12 bg-brand rounded-2xl shadow-xl overflow-hidden text-white p-8 text-center" data-aos="zoom-in">
+                <p class="mb-2 opacity-90 text-sm uppercase tracking-widest font-bold">Diagnostic Result</p>
+                <div class="flex justify-center items-baseline gap-2 mb-4">
+                    <span class="text-6xl font-black" id="finalCheckCount">0</span>
+                    <span class="text-2xl font-medium">개 해당</span>
+                </div>
+                <div class="bg-white/20 p-4 rounded-xl text-sm leading-relaxed backdrop-blur-sm inline-block text-left">
+                    <p>✅ <strong>1~2개:</strong> 생활 습관 교정으로 개선 가능 (리:얼핏 페이스)</p>
+                    <p>⚠️ <strong>3개 이상:</strong> 전문가 상담 및 교정 권장 (리:얼 작은얼굴)</p>
+                </div>
+            </section>
+            
+            <div class="text-center">
+                <button onclick="goToContact()" class="bg-gray-900 text-white px-12 py-4 rounded-full font-bold hover:bg-gray-800 transition shadow-lg">
+                    상담 신청하고 할인 혜택 받기
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <section id="Contact" class="py-20 bg-gray-900 text-white text-center">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-6 font-serif">IFC와 함께 변화를 시작하세요</h2>
+            <p class="text-gray-400 mb-10">가장 아름답고 건강한 나를 만나는 곳.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="http://pf.kakao.com/_nVSxdn/chat" target="_blank" class="bg-brand text-white px-8 py-3 rounded-full font-bold hover:bg-orange-700 transition">
+                    카카오톡 상담하기
+                </a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKpiMxqfnn6cspbj5LmIy_QKwl9lZbk3CYnDT-umroi7TB_g/viewform?usp=dialog" target="_blank" class="border border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white/10 transition">
+                    신청서 작성하기
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-950 text-gray-500 py-12 border-t border-gray-800 text-sm text-center">
+        <div class="container mx-auto px-6">
+            <p class="font-bold text-white text-lg mb-2">IFC 국제얼굴교정학회</p>
+            <p class="mb-6">Health & Wellness Total Solution.</p>
+            <p class="opacity-50">&copy; 2024 International Face Correction. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // 1. 체크박스 계산 로직
+        function setupCheckboxLogic(pageId, outputId) {
+            const page = document.getElementById(pageId);
+            if (!page) return;
+            const checkboxes = page.querySelectorAll('input[type="checkbox"]');
+            const output = document.getElementById(outputId);
+            function updateCount() {
+                let count = 0;
+                checkboxes.forEach(cb => { if(cb.checked) count++; });
+                if(output) output.textContent = count;
+            }
+            checkboxes.forEach(cb => {
+                cb.addEventListener('change', updateCount);
+            });
+        }
+
+        // 2. 페이지 로드 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({ duration: 800, once: true, offset: 50 });
+            
+            // URL 파라미터 처리 (?page=page2)
+            const urlParams = new URLSearchParams(window.location.search);
+            const targetPageId = urlParams.get('page');
+            
+            if (targetPageId && document.getElementById(targetPageId)) {
+                switchPage(targetPageId);
+            } else {
+                switchPage('page1'); 
+            }
+
+            setupCheckboxLogic('page5', 'finalCheckCount');
+        });
+
+        // 3. 페이지 전환 함수
+        function switchPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            const target = document.getElementById(pageId);
+            if(target) {
+                target.classList.add('active');
+                window.scrollTo(0, 0);
+            }
+            updateNavStyles(pageId);
+            setTimeout(() => AOS.refresh(), 100);
+        }
+
+        // 4. 네비게이션 스타일 업데이트
+        function updateNavStyles(activePageId) {
+            // Desktop & Mobile IDs Mapping
+            const menuIds = ['page1', 'page2', 'page3', 'page4', 'page5'];
+            
+            menuIds.forEach(id => {
+                const btn = document.getElementById('nav-' + id);
+                const mobBtn = document.getElementById('mob-nav-' + id);
+                
+                if(id === activePageId) {
+                    // Active Styling
+                    if(btn) btn.classList.add('nav-active');
+                    if(mobBtn) {
+                        mobBtn.classList.add('text-brand', 'border-brand', 'bg-orange-50');
+                        mobBtn.classList.remove('text-gray-500', 'border-transparent');
+                    }
+                } else {
+                    // Inactive Styling
+                    if(btn) btn.classList.remove('nav-active');
+                    if(mobBtn) {
+                        mobBtn.classList.remove('text-brand', 'border-brand', 'bg-orange-50');
+                        mobBtn.classList.add('text-gray-500', 'border-transparent');
+                    }
+                }
+            });
+        }
+
+        // 5. 문의하기 스크롤
+        function goToContact() {
+            const contactSection = document.getElementById('Contact');
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
