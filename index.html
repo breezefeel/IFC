@@ -604,12 +604,25 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             AOS.init({ duration: 800, once: true, offset: 50 });
-            switchPage('page1'); 
-            setupCheckboxLogic('page3', 'finalCheckCount');
+            
+            // 1. URL 파라미터 체크 및 초기 페이지 전환 로직 추가 (핵심 수정)
+            const urlParams = new URLSearchParams(window.location.search);
+            const targetPageId = urlParams.get('page'); // URL에서 'page' 값을 가져옴
+
+            // URL 파라미터가 있고, 해당 ID의 요소가 존재하면 그 페이지로 이동
+            if (targetPageId && document.getElementById(targetPageId)) {
+                switchPage(targetPageId);
+            } else {
+                // 파라미터가 없거나 유효하지 않으면 'page1'을 기본값으로 설정
+                switchPage('page1'); 
+            }
+            
+            setupCheckboxLogic('page3', 'finalCheckCount'); // 체크박스 로직 초기화
         });
     </script>
 </body>
 </html>
+
 
 
 
