@@ -13,54 +13,44 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* 기본 스타일 및 오렌지 테마 적용 */
+        /* 기본 스타일 */
         body { 
             font-family: 'Pretendard', sans-serif; 
             word-break: keep-all; 
-            background-color: #FFFBF7; /* 라이트 오렌지 배경 */
+            background-color: #FFFBF7; 
             color: #333;
         }
         
-        /* 브랜드 컬러: 오렌지 (#EA580C) */
+        /* 브랜드 컬러 */
         .text-brand { color: #EA580C; }
         .bg-brand { background-color: #EA580C; }
         .border-brand { border-color: #EA580C; }
         .hover-bg-brand:hover { background-color: #C2410C; }
 
-        /* 체크리스트 스타일 (자가 평가용) */
-        .check-item {
-            display: flex; align-items: flex-start; padding: 1.2rem;
-            border-bottom: 1px solid #FFEDD5; 
-            transition: background-color 0.2s; border-radius: 8px;
-        }
-        .check-item:hover { background-color: #FFF7ED; }
-        .check-item input[type="checkbox"] {
-            margin-right: 1rem; margin-top: 0.3rem;
-            min-width: 1.25rem; min-height: 1.25rem;
-            accent-color: #EA580C; 
-            cursor: pointer;
-        }
+        /* 텍스트 그림자 */
+        .text-shadow-md { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); }
         
         /* 페이지 전환 애니메이션 */
-        .page-content { display: none; animation: fadeIn 0.6s ease-out; min-height: 80vh; }
+        .page-content { display: none; animation: fadeIn 0.6s ease-out; min-height: 100vh; }
         .page-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 텍스트 그림자 추가 */
-        .text-shadow-md {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        }
+        /* 자가평가 체크박스 스타일 */
+        .check-item { display: flex; align-items: center; gap: 0.75rem; padding: 10px 15px; border-bottom: 1px solid #f9f0e8; transition: background-color 0.2s; }
+        .check-item:last-child { border-bottom: none; }
+        .check-item:hover { background-color: #fff7f2; }
+        .check-item input[type="checkbox"] { transform: scale(1.2); accent-color: #EA580C; }
     </style>
 </head>
 <body>
 
-    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-orange-100">
+    <nav class="hidden md:block sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-orange-100">    
         <div class="container mx-auto px-4 lg:px-8 py-4">
             <div class="flex justify-between items-center">
                 <div onclick="switchPage('page1')" class="flex items-center gap-2 cursor-pointer group">
-                    <div onclick="switchPage('page1')" class="text-2xl font-bold text-[#2C3E50] flex items-center gap-2 cursor-pointer">
-                        <i class="fa-solid fa-tree text-[#EA580C]"></i> 힐링트리
-                    </div>
+                    <img src="https://breezefeel.github.io/IFC/0.학회 로고-04.PNG" alt="IFC 로고" style="height:1.5em;">
+                    <span class="text-2xl font-black text-brand">IFC</span>
+                    <span class="text-xs text-gray-500 tracking-widest border-l border-gray-300 pl-2 ml-2">International Face Correction</span>
                 </div>
 
                 <div class="flex space-x-1 text-sm font-medium text-gray-600">
@@ -70,37 +60,55 @@
                 </div>
             </div>
         </div>
-        
-        <div class="lg:hidden border-t border-gray-100 bg-white">
-            <div class="flex">
-                <button id="mob-nav-page1" onclick="switchPage('page1')" class="flex-1 py-3 px-4 text-xs font-bold text-gray-500 border-b-2 border-transparent">작은얼굴</button>
-                <button id="mob-nav-page2" onclick="switchPage('page2')" class="flex-1 py-3 px-4 text-xs font-bold text-gray-500 border-b-2 border-transparent">얼굴 운동</button>
-                <button id="mob-nav-page3" onclick="switchPage('page3')" class="flex-1 py-3 px-4 text-xs font-bold text-brand border-b-2 border-transparent">자가 평가</button>
-            </div>
-        </div>
     </nav>
 
-    <div id="page1" class="page-content pt-10">
-        <header class="relative bg-white py-32 lg:py-24 text-center border-b border-orange-50 overflow-hidden">
+    <div id="page1" class="page-content active">
+        
+        <header class="hidden md:flex relative bg-white min-h-96 items-center justify-center overflow-hidden">
             <div class="absolute inset-0 z-0">
                 <img src="https://breezefeel.github.io/IFC/11.jpg" alt="Re:Al 작은얼굴" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gray-600/50"></div> </div>
-            <div class="relative z-10 container mx-auto px-6 max-w-4xl text-white">                
-                <h2 class="text-3xl md:text-3xl font-bold mb-6 leading-snug" data-aos="fade-up">
-                    Re:AI 작은얼굴 만들기
-                </h2>
-                <p class="max-w-2xl mx-auto leading-relaxed text-lg text-shadow-md" data-aos="fade-up" data-aos-delay="100">
-                    "진짜 작아집니다. IFC 작은얼굴 수기관리"
-                </p>                
+                <div class="absolute inset-0 bg-gray-600/50"></div> 
+            </div>
+            <div class="relative z-10 container mx-auto px-6 max-w-4xl text-white text-center"> 
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 leading-snug" data-aos="fade-up">Re:AI 작은얼굴 만들기</h2>
+                <p class="max-w-2xl mx-auto leading-relaxed text-lg text-shadow-md" data-aos="fade-up" data-aos-delay="100">"진짜 작아집니다. IFC 작은얼굴 수기관리"</p> 
             </div>
         </header>
 
-        <section class="py-20 bg-orange-50">
-            <div class="mx-auto px-6 max-w-7xl"> <div class="text-center mb-10" data-aos="fade-up" data-aos-delay="200">
-                    <button onclick="switchPage('page3')" class="bg-brand text-white px-8 py-3 rounded-full font-bold hover-bg-brand transition shadow-lg text-shadow-md">
-                        내 얼굴 상태 자가 평가하기 (30초)
-                    </button>
+        <div class="md:hidden flex flex-col"> 
+            
+            <div class="bg-white shadow-md sticky top-0 z-30">
+                <div class="pt-4 pb-4 text-center"> 
+                    <img src="https://breezefeel.github.io/IFC/0.학회%20로고-04.PNG" alt="IFC 학회 로고" class="mx-auto h-24 w-auto">
                 </div>
+                <nav class="py-3 border-t border-orange-50">
+                    <ul class="flex justify-around text-base font-medium text-gray-700">
+                        <li><button onclick="switchPage('page1')" class="text-brand border-b-2 border-brand pb-1">작은얼굴</button></li>
+                        <li><button onclick="switchPage('page2')" class="hover:text-brand pb-1">얼굴운동</button></li>
+                        <li><button onclick="switchPage('page3')" class="hover:text-brand pb-1">자가평가</button></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="relative w-full h-48 overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <img src="https://breezefeel.github.io/IFC/11.jpg" alt="Re:Al 작은얼굴" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gray-600/40"></div>
+                </div>
+                
+                <div class="absolute inset-0 z-10 flex flex-col items-center justify-center text-white text-center px-6">
+                    <h2 class="text-2xl font-bold mb-3 leading-snug text-shadow-md">
+                        Re:AI 작은얼굴 만들기
+                    </h2>
+                    <p class="leading-relaxed text-base text-shadow-md font-light">
+                        "진짜 작아집니다. IFC 작은얼굴 수기관리"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <section class="pt-10 pb-4 bg-orange-50">
+            <div class="mx-auto px-6 max-w-7xl">                 
                 
                 <h3 class="text-3xl font-bold text-gray-900 text-center mb-12" data-aos="fade-up">
                     <span class="text-brand">눈으로 확인하는</span> 리:얼한 변화
@@ -108,19 +116,19 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="bg-white p-6 rounded-xl shadow-lg border border-orange-200" data-aos="zoom-in">
-                        <div class="h-60 mb-4 overflow-hidden rounded-lg">
+                        <div class="h-68 mb-4 overflow-hidden rounded-lg">
                             <img src="https://breezefeel.github.io/IFC/전후22.png" alt="얼굴 축소 비포애프터" class="w-full h-full object-cover">
                         </div>
                         <p class="text-center font-bold text-lg text-gray-800">✅ 리:얼 10회 전/후</p>
                     </div>
                     <div class="bg-white p-6 rounded-xl shadow-lg border border-orange-200" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="h-60 mb-4 overflow-hidden rounded-lg">
+                        <div class="h-68 mb-4 overflow-hidden rounded-lg">
                             <img src="https://breezefeel.github.io/IFC/전후33.png" alt="안면 비대칭 개선" class="w-full h-full object-cover">
                         </div>
                         <p class="text-center font-bold text-lg text-gray-800">✅ 리:얼 10회 전/후</p>
                     </div>
                     <div class="bg-white p-6 rounded-xl shadow-lg border border-orange-200" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="h-60 mb-4 overflow-hidden rounded-lg">
+                        <div class="h-68 mb-4 overflow-hidden rounded-lg">
                             <img src="https://breezefeel.github.io/IFC/전후11.png" alt="붓기 이중턱 제거" class="w-full h-full object-cover">
                         </div>
                         <p class="text-center font-bold text-lg text-gray-800">✅ 리:얼 10회 전/후</p>
@@ -129,7 +137,7 @@
             </div>
         </section>
 
-        <section class="py-20 bg-white">
+        <section class="py-10 bg-white">
             <div class="container mx-auto px-6 max-w-5xl">
                 <h3 class="text-3xl font-bold text-gray-900 text-center mb-12" data-aos="fade-up">
                     <span class="text-brand">이미 만족한 고객들의</span> 생생한 후기
@@ -149,13 +157,20 @@
                     </div>
                 </div>
             </div>
+
+            <div class="p-16 text-center mb-4" data-aos="fade-up" data-aos-delay="200">
+                <button onclick="switchPage('page3')" class="bg-brand text-white px-8 py-3 rounded-full font-bold hover-bg-brand transition shadow-lg text-shadow-md">
+                    내 얼굴 상태 자가 평가하기 (30초)
+                </button>
+            </div>
+
         </section>
 
 
         <section class="py-20 bg-FFFBF7 border-t border-orange-100">
             <div class="container mx-auto px-6">
                 <h3 class="text-3xl font-bold text-gray-900 text-center mb-12" data-aos="fade-up">
-                    <span class="text-brand">50분 집중 케어</span> 프로그램 시퀀스
+                    <span class="text-brand">50분 집중 케어</span><br>리:얼 작은얼굴 시퀀스
                 </h3>
                 <div class="flex justify-center">
                     <div class="w-full max-w-5xl">
@@ -208,7 +223,7 @@
         <section class="py-16 bg-white border-t border-orange-100">
             <div class="container mx-auto px-6">
                 <h3 class="text-3xl font-bold text-gray-900 text-center mb-10" data-aos="fade-up">
-                    교정 후 효과를 <span class="text-brand">극대화</span>하는 시너지 습관
+                    관리 효과를<br><span class="text-brand">극대화</span>하는 시너지 습관
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
                     <div class="text-center p-8 bg-orange-50 rounded-xl border-l-4 border-brand shadow-sm" data-aos="fade-up">
@@ -268,7 +283,7 @@
             </div>
         </section>
 
-        <section id="Contact" class="py-20 bg-gradient-to-br from-[#2C3E50] to-[#3498DB] text-white text-center">
+        <section id="Contact" class="py-20 bg-gradient-to-br from-orange-300 to-orange-500 text-white text-center">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">당신의 얼굴<br>리:얼한 변화를 시작하세요</h2>
                 <p class="text-xl opacity-90 mb-10 font-light" data-aos="fade-up" data-aos-delay="100">
@@ -288,6 +303,19 @@
     </div>
 
     <div id="page2" class="page-content pt-10">
+        <div class="md:hidden bg-white shadow-md sticky top-0 z-30">
+            <div class="pt-4 pb-4 text-center">
+                <img src="https://breezefeel.github.io/IFC/0.학회%20로고-04.PNG" alt="IFC 학회 로고" class="mx-auto h-24 w-auto">
+            </div>
+            <nav class="py-3 border-t border-orange-50">
+                <ul class="flex justify-around text-base font-medium text-gray-700">
+                    <li><button onclick="switchPage('page1')" id="mobile-nav-page1" class="hover:text-brand pb-1">작은얼굴</button></li>
+                    <li><button onclick="switchPage('page2')" id="mobile-nav-page2" class="text-brand border-b-2 border-brand pb-1">얼굴운동</button></li>
+                    <li><button onclick="switchPage('page3')" id="mobile-nav-page3" class="hover:text-brand pb-1">자가평가</button></li>
+                </ul>
+            </nav>
+        </div>
+
         <div class="bg-white py-20 border-b border-orange-100">
             <div class="container mx-auto px-6 flex flex-col lg:flex-row items-center gap-12">
                 <div class="lg:w-1/2" data-aos="fade-right">
@@ -357,6 +385,20 @@
     </div>
 
     <div id="page3" class="page-content pt-10">
+
+        <div class="md:hidden bg-white shadow-md sticky top-0 z-30">
+            <div class="pt-4 pb-4 text-center">
+                <img src="https://breezefeel.github.io/IFC/0.학회%20로고-04.PNG" alt="IFC 학회 로고" class="mx-auto h-24 w-auto">
+            </div>
+            <nav class="py-3 border-t border-orange-50">
+                <ul class="flex justify-around text-base font-medium text-gray-700">
+                    <li><button onclick="switchPage('page1')" id="mobile-nav-page1" class="hover:text-brand pb-1">작은얼굴</button></li>
+                    <li><button onclick="switchPage('page2')" id="mobile-nav-page2" class="hover:text-brand pb-1">얼굴운동</button></li>
+                    <li><button onclick="switchPage('page3')" id="mobile-nav-page3" class="text-brand border-b-2 border-brand pb-1">자가평가</button></li>
+                </ul>
+            </nav>
+        </div>
+
         <header class="bg-white py-16 text-center border-b border-orange-100">
             <div class="container mx-auto px-6">
                 <span class="text-brand font-bold tracking-widest text-sm uppercase mb-2 block">Self-Diagnosis</span>
@@ -444,24 +486,21 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // 1. 체크박스 계산 로직 (Page 3용)
         function setupCheckboxLogic(pageId, outputId) {
             const page = document.getElementById(pageId);
             if (!page) return;
             const checkboxes = page.querySelectorAll('input[type="checkbox"]');
             const output = document.getElementById(outputId);
+            
             function updateCount() {
                 let count = 0;
                 checkboxes.forEach(cb => { if(cb.checked) count++; });
                 if(output) output.textContent = count;
             }
-            checkboxes.forEach(cb => {
-                cb.addEventListener('change', updateCount);
-            });
-            updateCount(); 
+            checkboxes.forEach(cb => { cb.addEventListener('change', updateCount); });
+            updateCount();
         }
 
-        // 2. 페이지 전환 함수
         function switchPage(pageId) {
             document.querySelectorAll('.page-content').forEach(page => {
                 page.classList.remove('active');
@@ -475,58 +514,29 @@
             setTimeout(() => AOS.refresh(), 100);
         }
 
-        // 3. 네비게이션 스타일 업데이트 (오렌지 테마 적용)
         function updateNavStyles(activePageId) {
             const navElements = [
-                { id: 'page1', desktop: document.getElementById('nav-page1'), mobile: document.getElementById('mob-nav-page1') },
-                { id: 'page2', desktop: document.getElementById('nav-page2'), mobile: document.getElementById('mob-nav-page2') },
-                { id: 'page3', desktop: document.getElementById('nav-page3'), mobile: document.getElementById('mob-nav-page3') }
+                { id: 'page1', desktop: document.getElementById('nav-page1') },
+                { id: 'page2', desktop: document.getElementById('nav-page2') },
+                { id: 'page3', desktop: document.getElementById('nav-page3') }
             ];
 
             navElements.forEach(item => {
                 const isActive = item.id === activePageId;
-                
-                // 데스크톱 스타일 (Active: Brand background, White text)
                 if (item.desktop) {
                     if (isActive) {
                         item.desktop.classList.add('bg-brand', 'text-white', 'shadow-md');
-                        item.desktop.classList.remove('text-gray-600', 'hover:text-brand', 'border', 'border-orange-200', 'hover:bg-orange-50');
+                        item.desktop.classList.remove('text-gray-600', 'hover:text-brand');
                     } else {
-                        // Page 3은 기본적으로 border가 있어서 별도 처리
-                        if(item.id === 'page3') {
-                            item.desktop.classList.add('text-brand', 'border', 'border-orange-200', 'hover:bg-orange-50');
-                            item.desktop.classList.remove('bg-brand', 'text-white', 'shadow-md', 'text-gray-600', 'hover:text-brand');
-                        } else {
-                            item.desktop.classList.add('text-gray-600', 'hover:text-brand');
-                            item.desktop.classList.remove('bg-brand', 'text-white', 'shadow-md', 'border', 'border-orange-200', 'hover:bg-orange-50');
-                        }
-                    }
-                }
-                // 모바일 스타일 (Active: Brand text, Brand underline)
-                if (item.mobile) {
-                    if (isActive) {
-                        item.mobile.classList.add('text-brand', 'border-b-2', 'border-brand');
-                        item.mobile.classList.remove('text-gray-500', 'border-transparent');
-                    } else {
-                        item.mobile.classList.remove('text-brand', 'border-b-2', 'border-brand');
-                        item.mobile.classList.add('text-gray-500', 'border-transparent');
+                        item.desktop.classList.add('text-gray-600', 'hover:text-brand');
+                        item.desktop.classList.remove('bg-brand', 'text-white', 'shadow-md');
                     }
                 }
             });
         }
 
-        // 4. 문의하기 스크롤
-        function goToContact() {
-            const contactSection = document.getElementById('Contact');
-            if (contactSection) {
-                contactSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        // 5. 초기화
         document.addEventListener('DOMContentLoaded', function() {
             AOS.init({ duration: 800, once: true, offset: 50 });
-            
             switchPage('page1'); 
             setupCheckboxLogic('page3', 'finalCheckCount');
         });
