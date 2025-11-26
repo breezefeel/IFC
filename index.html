@@ -63,6 +63,19 @@
 
     <div id="page1" class="page-content active">
         
+        <div class="md:hidden bg-white shadow-md sticky top-0 z-30">
+            <div class="pt-4 pb-4 text-center">
+                <img src="https://breezefeel.github.io/IFC/0.학회%20로고-04.PNG" alt="IFC 학회 로고" class="mx-auto h-36 w-auto">
+            </div>
+            <nav class="py-3 border-t border-orange-50">
+                <ul class="flex justify-around text-base font-medium text-gray-700">
+                    <li><button onclick="switchPage('page1')" id="mobile-nav-page1" class="hover:text-brand pb-1">작은얼굴</button></li>
+                    <li><button onclick="switchPage('page2')" id="mobile-nav-page2" class="text-brand border-b-2 border-brand pb-1">얼굴운동</button></li>
+                    <li><button onclick="switchPage('page3')" id="mobile-nav-page3" class="hover:text-brand pb-1">셀프 평가</button></li>
+                </ul>
+            </nav>
+        </div>
+
         <header class="hidden md:flex relative bg-white min-h-96 items-center justify-center overflow-hidden">
             <div class="absolute inset-0 z-0">
                 <img src="https://breezefeel.github.io/IFC/11.jpg" alt="Re:Al 작은얼굴" class="w-full h-full object-cover">
@@ -76,19 +89,6 @@
 
         <div class="md:hidden flex flex-col"> 
             
-            <div class="bg-white shadow-md sticky top-0 z-30">
-                <div class="pt-4 pb-4 text-center"> 
-                    <img src="https://breezefeel.github.io/IFC/0.학회%20로고-04.PNG" alt="IFC 학회 로고" class="mx-auto h-36 w-auto">
-                </div>
-                <nav class="py-3 border-t border-orange-50">
-                    <ul class="flex justify-around text-base font-medium text-gray-700">
-                        <li><button onclick="switchPage('page1')" class="text-brand border-b-2 border-brand pb-1">작은얼굴</button></li>
-                        <li><button onclick="switchPage('page2')" class="hover:text-brand pb-1">얼굴운동</button></li>
-                        <li><button onclick="switchPage('page3')" class="hover:text-brand pb-1">셀프 평가</button></li>
-                    </ul>
-                </nav>
-            </div>
-
             <div class="relative w-full h-80 overflow-hidden">
                 <div class="absolute inset-0 z-0">
                     <img src="https://breezefeel.github.io/IFC/11.jpg" alt="Re:Al 작은얼굴" class="w-full h-full object-cover">
@@ -622,6 +622,7 @@
     </script>
 </body>
 </html>
+
 
 
 
