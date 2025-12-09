@@ -595,23 +595,8 @@
         }
 
         function goToContact() {
-            const contactSection = document.getElementById('Contact');
-            
-            // 1. 해당 섹션이 존재하면 스크롤 시작
-            if (contactSection) {
-                // 'smooth' 옵션으로 부드럽게 스크롤하며, 상단 내비게이션바를 피하기 위해 약간의 여백을 줍니다.
-                contactSection.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start' // 섹션을 뷰포트 상단에 맞춥니다.
-                }); 
-                
-                // 2. 만약 현재 다른 페이지(page1, page2)에 있다면, 
-                // 페이지가 Contact 섹션을 포함하는 페이지로 전환되어야 합니다.
-                // 현재 구조상 Contact 섹션은 어떤 페이지에도 속하지 않으므로, 
-                // switchPage('page1') 등을 호출할 필요는 없습니다. 스크롤만 합니다.
-            } else {
-                console.error("Error: 'Contact' section not found.");
-            }
+            // Contact 섹션은 page1에 있으므로, page1로 전환하고 'Contact'으로 스크롤 요청
+            switchPage('page1', 'Contact'); 
         }
         
         // ===============================================
@@ -699,6 +684,7 @@
     </script>
 </body>
 </html>
+
 
 
 
