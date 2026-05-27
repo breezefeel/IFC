@@ -11,6 +11,7 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="consult-shared.css">
 
     <style>
         /* 기본 스타일 */
@@ -44,19 +45,20 @@
 </head>
 <body>
 
-    <nav class="hidden md:block sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-orange-100">    
+    <nav class="hidden md:block sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100">    
         <div class="container mx-auto px-4 lg:px-8 py-4">
-            <div class="flex justify-between items-center">
-                <div onclick="switchPage('page1')" class="flex items-center gap-2 cursor-pointer group">                    
+            <div class="flex items-center gap-4">
+                <div onclick="switchPage('page1')" class="flex items-center gap-2 cursor-pointer flex-shrink-0">                    
                     <span class="text-2xl font-black text-brand">Re:Al</span>
-                    <span class="text-xs text-gray-500 tracking-widest border-l border-gray-300 pl-2 ml-2">국제얼굴교정학회 공식 프로그램</span>
+                    <span class="text-xs text-gray-500 tracking-widest border-l border-gray-300 pl-2 ml-2 hidden lg:inline">국제얼굴교정학회 공식 프로그램</span>
                 </div>
 
-                <div class="flex space-x-1 text-sm font-medium text-gray-600">
-                    <button id="nav-page1" onclick="switchPage('page1')" class="px-4 py-2 rounded-full transition font-bold">리:얼 작은얼굴</button>
-                    <button id="nav-page2" onclick="switchPage('page2')" class="px-4 py-2 rounded-full transition font-bold">리:얼핏 페이스</button>
-                    <button id="nav-page3" onclick="switchPage('page3')" class="px-4 py-2 rounded-full text-brand font-bold border border-orange-200 hover:bg-orange-50 transition">셀프 평가</button>                    
+                <div class="flex-1 flex justify-center space-x-1 text-sm font-medium">
+                    <button id="nav-page1" onclick="switchPage('page1')" class="px-4 py-2 rounded-full transition font-bold text-gray-500 hover:bg-gray-100">리:얼 작은얼굴</button>
+                    <button id="nav-page2" onclick="switchPage('page2')" class="px-4 py-2 rounded-full transition font-bold text-gray-500 hover:bg-gray-100">리:얼핏 페이스</button>
+                    <button id="nav-page3" onclick="switchPage('page3')" class="px-4 py-2 rounded-full transition font-bold text-gray-500 hover:bg-gray-100">셀프 평가</button>
                 </div>
+                <button onclick="goToContact()" class="flex-shrink-0 bg-brand text-white px-6 py-2 rounded-full hover-bg-brand transition shadow-lg font-bold">문의</button>
             </div>
         </div>
     </nav>
@@ -72,7 +74,7 @@
                     <li><button onclick="switchPage('page1')" id="mobile-nav-page1" class="text-brand border-b-2 border-brand pb-1">작은얼굴</button></li>
                     <li><button onclick="switchPage('page2')" id="mobile-nav-page2" class="hover:text-brand pb-1">얼굴운동</button></li>
                     <li><button onclick="switchPage('page3')" id="mobile-nav-page3" class="hover:text-brand pb-1">셀프 평가</button></li>
-                    <li><button onclick="goToContact()" class="hover:text-brand pb-1">문의/신청</button></li>
+                    <li><button onclick="goToContact()" class="hover:text-brand pb-1">문의</button></li>
                 </ul>
             </nav>
         </div>
@@ -324,15 +326,12 @@
                 </p>
                 
                 <div class="flex flex-col md:flex-row justify-center gap-4" data-aos="zoom-in">
-                    <a href="http://pf.kakao.com/_nVSxdn/chat" target="_blank" class="bg-white text-[#2C3E50] px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition shadow-lg inline-flex items-center justify-center gap-2">
-                        <span>서울 목동점 문의하기</span> <i class="fa-solid fa-external-link-alt text-sm"></i>
-                    </a>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeuC_kPwzSY2gF7QhaOAJCf7YjJ3GuaLCF2gyEEAhZViOWhSw/viewform?usp=header" target="_blank" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white/10 transition inline-flex items-center justify-center gap-2">
-                        <span>인천 계양점 신청하기</span> <i class="fa-solid fa-chevron-right text-sm"></i>
-                    </a>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeSoLkIaYW164A3i7P16tONYXkqD_ZrCu0oX1_sSSrduLOtrw/viewform?usp=sf_link" target="_blank" class="bg-white text-[#2C3E50] px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition shadow-lg inline-flex items-center justify-center gap-2">
-                        <span>전문가 교육과정 신청</span> <i class="fa-solid fa-external-link-alt text-sm"></i>
-                    </a>
+                    <button type="button" onclick="openLandingConsult({ intent: 'yaksu' })" class="bg-white text-[#2C3E50] px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition shadow-lg inline-flex items-center justify-center gap-2">
+                        <span>서울 약수점</span> <i class="fa-solid fa-chevron-right text-sm"></i>
+                    </button>
+                    <button type="button" onclick="openLandingConsult({ intent: 'jakjeon' })" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white/10 transition inline-flex items-center justify-center gap-2">
+                        <span>인천 작전점</span> <i class="fa-solid fa-chevron-right text-sm"></i>
+                    </button>
                 </div>
             </div>
         </section>
@@ -348,7 +347,7 @@
                     <li><button onclick="switchPage('page1')" id="mobile-nav-page1" class="hover:text-brand pb-1">작은얼굴</button></li>
                     <li><button onclick="switchPage('page2')" id="mobile-nav-page2" class="text-brand border-b-2 border-brand pb-1">얼굴운동</button></li>
                     <li><button onclick="switchPage('page3')" id="mobile-nav-page3" class="hover:text-brand pb-1">셀프 평가</button></li>
-                    <li><button onclick="goToContact()" class="hover:text-brand pb-1">문의/신청</button></li>
+                    <li><button onclick="goToContact()" class="hover:text-brand pb-1">문의</button></li>
                 </ul>
             </nav>
         </div>
@@ -464,9 +463,14 @@
                 <p class="text-gray-700 text-lg mb-8" data-aos="fade-up" data-aos-delay="100">
                     지금 바로 나의 얼굴 습관을 진단하고,<br>긍정적인 변화를 만드는 첫걸음을 시작하세요.
                 </p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdQiY9PrxsFU3xO7xCArrUNAM0Q-s4DnCUyjtSzMKJI2Omg-w/viewform?usp=sf_link" target="_blank" class="bg-brand text-white px-10 py-4 rounded-full font-bold hover-bg-brand transition shadow-lg" data-aos="zoom-in">
-                    인천 계양점 신청하기
-                </a>                
+                <div class="flex flex-col sm:flex-row justify-center gap-4" data-aos="zoom-in">
+                    <button type="button" onclick="openLandingConsult({ intent: 'yaksu' })" class="bg-brand text-white px-10 py-4 rounded-full font-bold hover-bg-brand transition shadow-lg inline-flex items-center justify-center gap-2">
+                        서울 약수점
+                    </button>
+                    <button type="button" onclick="openLandingConsult({ intent: 'jakjeon' })" class="bg-white text-brand border-2 border-brand px-10 py-4 rounded-full font-bold hover:bg-orange-50 transition shadow-lg inline-flex items-center justify-center gap-2">
+                        인천 작전점
+                    </button>
+                </div>                
             </div>
         </section>
     </div>
@@ -482,7 +486,7 @@
                     <li><button onclick="switchPage('page1')" id="mobile-nav-page1" class="hover:text-brand pb-1">작은얼굴</button></li>
                     <li><button onclick="switchPage('page2')" id="mobile-nav-page2" class="hover:text-brand pb-1">얼굴운동</button></li>
                     <li><button onclick="switchPage('page3')" id="mobile-nav-page3" class="text-brand border-b-2 border-brand pb-1">셀프 평가</button></li>
-                    <li><button onclick="goToContact()" class="hover:text-brand pb-1">문의/신청</button></li>
+                    <li><button onclick="goToContact()" class="hover:text-brand pb-1">문의</button></li>
                 </ul>
             </nav>
         </div>
@@ -648,20 +652,34 @@
 
         function updateNavStyles(activePageId) {
             const navElements = [
-                { id: 'page1', desktop: document.getElementById('nav-page1') },
-                { id: 'page2', desktop: document.getElementById('nav-page2') },
-                { id: 'page3', desktop: document.getElementById('nav-page3') }
+                { id: 'page1', desktop: document.getElementById('nav-page1'), mobile: document.getElementById('mobile-nav-page1') },
+                { id: 'page2', desktop: document.getElementById('nav-page2'), mobile: document.getElementById('mobile-nav-page2') },
+                { id: 'page3', desktop: document.getElementById('nav-page3'), mobile: document.getElementById('mobile-nav-page3') }
             ];
 
             navElements.forEach(item => {
                 const isActive = item.id === activePageId;
+                const desktopActive = ['bg-brand', 'text-white', 'shadow-md'];
+                const desktopInactive = ['text-gray-500', 'hover:bg-gray-100'];
+                const mobileActive = ['text-brand', 'border-b-2', 'border-brand'];
+                const mobileInactive = ['text-gray-500', 'border-transparent', 'hover:text-brand'];
+
                 if (item.desktop) {
                     if (isActive) {
-                        item.desktop.classList.add('bg-brand', 'text-white', 'shadow-md');
-                        item.desktop.classList.remove('text-gray-600', 'hover:text-brand');
+                        item.desktop.classList.add(...desktopActive);
+                        item.desktop.classList.remove(...desktopInactive);
                     } else {
-                        item.desktop.classList.add('text-gray-600', 'hover:text-brand');
-                        item.desktop.classList.remove('bg-brand', 'text-white', 'shadow-md');
+                        item.desktop.classList.add(...desktopInactive);
+                        item.desktop.classList.remove(...desktopActive);
+                    }
+                }
+                if (item.mobile) {
+                    if (isActive) {
+                        item.mobile.classList.add(...mobileActive);
+                        item.mobile.classList.remove(...mobileInactive);
+                    } else {
+                        item.mobile.classList.add(...mobileInactive);
+                        item.mobile.classList.remove(...mobileActive);
                     }
                 }
             });
@@ -685,6 +703,8 @@
             setupCheckboxLogic('page3', 'finalCheckCount'); // 체크박스 로직 초기화
         });
     </script>
+    <script src="consult-shared.js"></script>
+    <script>initLandingConsult({ pageKey: 'beauty' });</script>
 </body>
 </html>
 
